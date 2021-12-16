@@ -20,7 +20,7 @@ Vue.prototype.$ayPrompt = AsyncMessageBox.ayPrompt;
 
 ```html
 <template>
-  <el-button type="primary" @click="handleClick(true)">成功操作</el-button>
+  <el-button @click="handleClick(true)">成功操作</el-button>
   <el-button type="danger" @click="handleClick(false)">失败操作</el-button>
 </template>
 
@@ -61,7 +61,7 @@ Vue.prototype.$ayPrompt = AsyncMessageBox.ayPrompt;
 
 ```html
 <template>
-  <el-button type="primary" @click="handleClick">修改价格</el-button>
+  <el-button @click="handleClick">修改价格</el-button>
 </template>
 
 <script>

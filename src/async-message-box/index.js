@@ -46,7 +46,14 @@ function createBox(type = "confirm") {
   };
 }
 
+const ayConfirm = createBox();
+const ayPrompt = createBox("prompt");
+
 export default {
-  ayConfirm: createBox(),
-  ayPrompt: createBox("prompt")
+  install(Vue) {
+    Vue.prototype.$ayConfirm = ayConfirm;
+    Vue.prototype.$ayPrompt = ayPrompt;
+  },
+  ayConfirm,
+  ayPrompt
 };
