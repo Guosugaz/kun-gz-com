@@ -1,8 +1,8 @@
-import ElementUI from "element-ui";
+import Element from "element-ui";
+import KunElCom from "../../lib/index";
 import "element-ui/lib/theme-chalk/index.css";
-import { ayConfirm } from "../../lib/async-message-box/index";
 
 export default ({ Vue }) => {
-  Vue.use(ElementUI);
-  Vue.prototype.$ayConfirm = ayConfirm;
+  Vue.use(Element);
+  Vue.use(KunElCom);
 };

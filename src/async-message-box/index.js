@@ -1,10 +1,3 @@
-/*
- * @Description: 异步的MessageBox
- * @Author: Guosugaz
- * @LastEditors: Guosugaz
- * @Date: 2021-12-14 13:43:52
- * @LastEditTime: 2021-12-15 14:04:35
- */
 import { MessageBox, Loading } from "element-ui";
 
 const defaultOptions = {
@@ -12,13 +5,15 @@ const defaultOptions = {
   closeOnClickModal: false,
   loadingText: "操作中...",
   isAsync: true, // 是否要异步
-  isNums: false // 输入框是否为数字
+  isNums: false, // 输入框是否为数字
+  callback() {
+    /**/
+  }
 };
 
-function createBox (type = "confirm") {
-  return function (options, cb, cancel) {
-    options = { ...defaultOptions, ...options };
-    MessageBox[type](options.message, {
+function createBox(type = "confirm") {
+  return function (options = {}, cb, cancel) {
+    options = Object.assign(defaultOptions, options, {
       beforeClose: (action, instance, done) => {
         let loading;
         if (action === "confirm") {
@@ -33,27 +28,25 @@ function createBox (type = "confirm") {
             instance.inputValue = Number(instance.inputValue.trim()) || 0;
           }
           cb &&
-            cb(
-              (success = true) => {
+            cb({
+              done(success = true) {
                 loading && loading.close();
                 success && done();
               },
-              action,
-              instance
-            );
+              instance,
+              action
+            });
         } else {
           cancel && cancel();
           done();
         }
-      },
-      ...options
-    }).catch((e) => {
-      /**/
+      }
     });
+    MessageBox[type](options.message, options);
   };
 }
 
 export default {
   ayConfirm: createBox(),
   ayPrompt: createBox("prompt")
-}
+};
