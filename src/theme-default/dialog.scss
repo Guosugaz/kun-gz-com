@@ -1,0 +1,56 @@
+@import "./common/variables.scss";
+@import "./common/mixin.scss";
+
+$bem: kun-dialog;
+
+.#{bem} {
+  border-radius: $dialogBorder !important;
+  overflow: hidden;
+
+  &_fullscreen {
+    border-radius: 0 !important;
+  }
+  &_middle {
+    top: 50%;
+    transform: translateY(-50%) !important;
+  }
+  &-body {
+    margin-bottom: 0 !important;
+    padding: 0 15px;
+    overflow-x: hidden;
+    @include scrollBar;
+  }
+  &-title {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding-right: 25px;
+    font-size: 18px;
+
+    .icon {
+      margin-left: 10px;
+      width: 14px;
+      font-size: 16px;
+      color: #909399;
+      cursor: pointer;
+      &:hover {
+        color: $dialogIconHoverColor;
+      }
+    }
+  }
+
+  .el-dialog__body {
+    padding: 10px 0;
+  }
+
+  .el-dialog__footer {
+    padding: 10px 15px;
+    background: rgba(245, 245, 245);
+  }
+}
+@each $v in $dialogWidthTypes {
+  $i: index($dialogWidthTypes, $v);
+  .#{bem}_#{$v} {
+    max-width: nth($dialogWidthMaxRange, $i);
+  }
+}

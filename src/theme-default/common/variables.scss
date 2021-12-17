@@ -1,0 +1,15 @@
+// dialog
+$dialogBorder: 8px;
+$dialogIconHoverColor: #409EFF;
+// ---- width -----
+$dialogWidthTypes: small, normal, large; // 可选宽度类型
+$dialogWidthRange: 50vw, 75vw, 90vw; // 宽度范围
+$dialogWidthMaxRange: 600px, 900px, 1200px; // 最大宽度范围
+// ---- width -----
+
+// the :export directive is the magic sauce for webpack
+// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+:export {
+  dialogWidthTypes: $dialogWidthTypes;
+  dialogWidthRange: $dialogWidthRange;
+}

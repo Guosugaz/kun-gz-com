@@ -1,8 +1,8 @@
 const path = require("path");
 
 module.exports = {
-  title: "kun-el-com",
-  description: "element-ui的再封装",
+  title: "GzCom",
+  description: "封装平时搭建的通用组件",
   plugins: ["demo-container"],
   alias: {
     "@lib": path.resolve(__dirname, "../lib")

@@ -6,7 +6,7 @@
 
 ```js
 import Vue from "vue";
-import AsyncMessageBox from "@sugaz/el-com/lib/async-message-box";
+import AsyncMessageBox from "@sugaz/gz-com/lib/async-message-box";
 
 Vue.prototype.$ayConfirm = AsyncMessageBox.ayConfirm;
 Vue.prototype.$ayPrompt = AsyncMessageBox.ayPrompt;

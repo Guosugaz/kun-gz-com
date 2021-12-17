@@ -1,13 +1,19 @@
 import vue from "rollup-plugin-vue";
 import { getBabelOutputPlugin } from "@rollup/plugin-babel";
-// import commonjs from "@rollup/plugin-commonjs";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
+import alias from "@rollup/plugin-alias";
+import jsImpoerSass from "./rollup-plugin-js-import-sass";
 
-const components = ["async-message-box"];
+const components = ["async-message-box", "dialog"];
 
 const plugins = [
-  // commonjs(),
+  nodeResolve(),
+  alias({
+    entries: [{ find: "@", replacement: "src" }]
+  }),
   vue(),
+  jsImpoerSass(),
   getBabelOutputPlugin({
     presets: ["@babel/preset-env"],
     plugins: [["@babel/plugin-transform-runtime"]]
@@ -15,7 +21,7 @@ const plugins = [
   terser()
 ];
 
-const external = ["element-ui"]
+const external = ["vue", "element-ui"];
 
 const componentsConfig = components.map((name) => ({
   input: `src/${name}/index.js`,

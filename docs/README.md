@@ -4,17 +4,17 @@
 
 ```js
 // npm
-npm i -S @sugaz/el-com
+npm i -S @sugaz/gz-com
 
 // yarn
-yarn add @sugaz/el-com
+yarn add @sugaz/gz-com
 ```
 
 ### 全局引入
 
 ```js
 import Vue from "vue";
-import KunElCom from "@sugaz/el-com";
+import KunElCom from "@sugaz/gz-com";
 
 Vue.use(KunElCom);
 ```
