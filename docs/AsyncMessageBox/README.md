@@ -8,6 +8,10 @@
 import Vue from "vue";
 import AsyncMessageBox from "@sugaz/gz-com/lib/async-message-box";
 
+// 全部引入
+Vue.use(AsyncMessageBox);
+
+// 单独注册
 Vue.prototype.$ayConfirm = AsyncMessageBox.ayConfirm;
 Vue.prototype.$ayPrompt = AsyncMessageBox.ayPrompt;
 ```

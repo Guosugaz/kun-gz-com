@@ -12,7 +12,8 @@ module.exports = {
     sidebarDepth: 0,
     sidebar: [
       ["/", "快速上手"],
-      ["/AsyncMessageBox/", "AsyncMessageBox"]
+      ["/AsyncMessageBox/", "AsyncMessageBox"],
+      ["/Dialog/", "Dialog"]
     ],
     nav: [
       { text: 'Github', link: 'https://github.com/Guosugaz/kun-el-com', target:'_blank' }

@@ -1,9 +1,9 @@
 @import "./common/variables.scss";
 @import "./common/mixin.scss";
 
-$bem: kun-dialog;
+$bem: gz-dialog;
 
-.#{bem} {
+.#{$bem} {
   border-radius: $dialogBorder !important;
   overflow: hidden;
 
@@ -50,7 +50,7 @@ $bem: kun-dialog;
 }
 @each $v in $dialogWidthTypes {
   $i: index($dialogWidthTypes, $v);
-  .#{bem}_#{$v} {
+  .#{$bem}_#{$v} {
     max-width: nth($dialogWidthMaxRange, $i);
   }
 }

@@ -21,12 +21,11 @@
         />
         <!-- 全屏按钮 -->
         <i
-          :class="`el-icon-{isFullscreen ? 'full-screen' : '-copy-document'}icon`"
+          :class="`el-icon-${isFullscreen ? 'full-screen' : 'copy-document'} icon`"
           @click="handleFullscreen"
         />
       </div>
     </div>
-    <!-- <slot /> -->
     <div :style="bodyStyle" :class="`${bem}-body`">
       <slot />
     </div>
@@ -44,11 +43,11 @@
   import variables from "@/theme-default/common/variables.scss";
   import { isDef } from "@sugaz/utils/lib/base";
   
-  const bem = "kun-dialog";
+  const bem = "gz-dialog";
   const widthList = variables.dialogWidthTypes.split(",");
 
   export default {
-    name: "KunDialog",
+    name: "GzDialog",
     inheritAttrs: false,
     props: {
       show: {

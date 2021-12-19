@@ -9,9 +9,9 @@ export default function myPlugin() {
       const keysMatch = mapCode.matchAll(/\$\w+/g);
       let res = `export default { `;
       Array.from(keysMatch).forEach((item) => {
-        const key = item[0].replace(/^\$/, "");
+        const key = item[0]?.replace(/^\$/, "");
         const reg = new RegExp(`\\$${key}:\\s(.+);`);
-        const value = code.match(reg)[1];
+        const value = code.match(reg)[1]?.replaceAll(/\s/g, "");
         res += `${key}: "${value}",`;
       });
       res += " }";

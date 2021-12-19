@@ -1,10 +1,11 @@
-import vue from "rollup-plugin-vue";
+import vue from "rollup-plugin-vue2";
 import { getBabelOutputPlugin } from "@rollup/plugin-babel";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
 import alias from "@rollup/plugin-alias";
 import jsImpoerSass from "./rollup-plugin-js-import-sass";
 
+const isProd = process.env.NODE_ENV === "production";
 const components = ["async-message-box", "dialog"];
 
 const plugins = [
@@ -17,11 +18,12 @@ const plugins = [
   getBabelOutputPlugin({
     presets: ["@babel/preset-env"],
     plugins: [["@babel/plugin-transform-runtime"]]
-  }),
-  terser()
+  })
 ];
 
-const external = ["vue", "element-ui"];
+if (isProd) plugins.push(terser());
+
+const external = ["element-ui"];
 
 const componentsConfig = components.map((name) => ({
   input: `src/${name}/index.js`,
