@@ -4,6 +4,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
 import alias from "@rollup/plugin-alias";
 import jsImpoerSass from "./rollup-plugin-js-import-sass";
+import clear from "rollup-plugin-clear";
 
 const isProd = process.env.NODE_ENV === "production";
 const components = ["async-message-box", "dialog"];
@@ -21,7 +22,14 @@ const plugins = [
   })
 ];
 
-if (isProd) plugins.push(terser());
+if (isProd) {
+  plugins.unshift(
+    clear({
+      targets: ["lib"]
+    })
+  );
+  plugins.push(terser());
+}
 
 const external = ["element-ui"];
 

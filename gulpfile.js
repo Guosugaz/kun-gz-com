@@ -1,18 +1,24 @@
-const { series, src, dest } = require("gulp");
+const { series, src, dest, watch, task } = require("gulp");
 const sass = require("gulp-sass")(require("sass"));
 const autoprefixer = require("gulp-autoprefixer");
 const cssmin = require("gulp-cssmin");
 
+const isProd = process.env.NODE_ENV === "production";
+
 function compile() {
-  return src("./src/theme-default/*.scss")
+  let temp = src("./src/theme-default/*.scss")
     .pipe(sass.sync())
     .pipe(
       autoprefixer({
         cascade: false
       })
-    )
-    .pipe(cssmin())
-    .pipe(dest("./lib/theme-default"));
+    );
+  if (isProd) temp = temp.pipe(cssmin());
+  return temp.pipe(dest("./lib/theme-default"));
 }
 
-exports.build = series(compile);
+task("dev", () => {
+  watch("src/theme-default/**/*.scss", { ignoreInitial: false }, compile);
+});
+
+task("build", series(compile));
