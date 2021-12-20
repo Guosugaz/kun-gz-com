@@ -1,6 +1,7 @@
 @import "./common/variables.scss";
 @import "./common/mixin.scss";
 
+$wrapPaddingLeftRight: 15px;
 $bem: gz-dialog;
 
 .#{$bem} {
@@ -9,6 +10,9 @@ $bem: gz-dialog;
 
   &_fullscreen {
     border-radius: 0 !important;
+    &.el-dialog {
+      margin: 0;
+    }
   }
   &_middle {
     top: 50%;
@@ -24,28 +28,31 @@ $bem: gz-dialog;
     display: flex;
     justify-content: space-between;
     align-content: center;
-    padding-right: 25px;
     font-size: 18px;
 
     .icon {
       margin-left: 10px;
       width: 14px;
       font-size: 16px;
-      color: #909399;
+      color: #bbb;
       cursor: pointer;
       &:hover {
-        color: $dialogIconHoverColor;
+        color: $dialogIconHoverColor !important;
       }
     }
   }
 
-  .el-dialog__body {
-    padding: 10px 0;
-  }
-
-  .el-dialog__footer {
-    padding: 10px 15px;
-    background: rgba(245, 245, 245);
+  .el-dialog {
+    &__header {
+      padding: 15px $wrapPaddingLeftRight;
+    }
+    &__body {
+      padding: 5px;
+    }
+    &__footer {
+      padding: 8px $wrapPaddingLeftRight;
+      background: rgba(245, 245, 245);
+    }
   }
 }
 @each $v in $dialogWidthTypes {

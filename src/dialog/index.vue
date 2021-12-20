@@ -5,9 +5,10 @@
     :width="wrapWidth"
     :custom-class="wrapClass"
     :top="mapTop"
-    :close-on-press-escape="false"
-    :append-to-body="true"
-    :close-on-click-modal="false"
+    :close-on-press-escape="closeOnPressEscape"
+    :show-close="false"
+    :append-to-body="appendToBody"
+    :close-on-click-modal="closeOnClickModal"
     @close="handleCancel"
   >
     <div slot="title" :class="`${bem}-title`">
@@ -21,8 +22,17 @@
         />
         <!-- 全屏按钮 -->
         <i
-          :class="`el-icon-${isFullscreen ? 'full-screen' : 'copy-document'} icon`"
+          v-if="showFullscreen"
+          :class="`el-icon-${
+            isFullscreen ? 'copy-document' : 'full-screen'
+          } icon`"
           @click="handleFullscreen"
+        />
+        <!-- 关闭按钮 -->
+        <i
+          v-if="showClose"
+          class="el-icon-close icon"
+          @click="$emit('update:show', false)"
         />
       </div>
     </div>
@@ -42,7 +52,7 @@
    */
   import variables from "@/theme-default/common/variables.scss";
   import { isDef } from "@sugaz/utils/lib/base";
-  
+
   const bem = "gz-dialog";
   const widthList = variables.dialogWidthTypes.split(",");
 
@@ -72,6 +82,27 @@
       refresh: {
         type: Function,
         default: null
+      },
+      // 是否有全屏
+      showFullscreen: {
+        type: Boolean,
+        default: true
+      },
+      showClose: {
+        type: Boolean,
+        default: true
+      },
+      closeOnPressEscape: {
+        type: Boolean,
+        default: false
+      },
+      closeOnClickModal: {
+        type: Boolean,
+        default: false
+      },
+      appendToBody: {
+        type: Boolean,
+        default: true
       }
     },
     data() {
@@ -83,7 +114,7 @@
     computed: {
       bodyStyle() {
         if (this.isFullscreen) {
-          return { height: "calc(100vh - 50.7px - 72px)" };
+          return { height: "calc(100vh - 49px - 66px)" };
         } else {
           return { "max-height": "70vh" };
         }

@@ -14,7 +14,7 @@ yarn add @sugaz/gz-com
 
 ```js
 import Vue from "vue";
-import KunElCom from "@sugaz/gz-com";
+import GzCom from "@sugaz/gz-com";
 
-Vue.use(KunElCom);
+Vue.use(GzCom);
 ```
