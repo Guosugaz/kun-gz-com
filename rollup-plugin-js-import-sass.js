@@ -11,7 +11,7 @@ export default function myPlugin() {
       Array.from(keysMatch).forEach((item) => {
         const key = item[0]?.replace(/^\$/, "");
         const reg = new RegExp(`\\$${key}:\\s(.+);`);
-        const value = code.match(reg)[1]?.replaceAll(/\s/g, "");
+        const value = code.match(reg)[1]?.replace(/\s/g, "");
         res += `${key}: "${value}",`;
       });
       res += " }";
