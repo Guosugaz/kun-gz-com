@@ -1,0 +1,42 @@
+$bem: gz-group-item;
+
+.#{$bem} {
+  display: inline-flex;
+  align-items: center;
+  padding-bottom: 10px;
+  &_label {
+    box-sizing: border-box;
+    padding-right: 10px;
+    text-align: right;
+    color: #666;
+    font-size: 13px;
+  }
+  &_content {
+    display: inline-flex;
+    flex: 1;
+
+    &_left {
+      justify-content: flex-start;
+    }
+    &_center {
+      justify-content: center;
+    }
+    &_right {
+      justify-content: flex-end;
+    }
+  }
+}
+
+// 一行最多7个
+@for $i from 1 through 7 {
+  .gz-group_#{$i} {
+    @for $j from 1 through $i {
+      .#{$bem}_#{$j} {
+        flex-basis: calc(100% / $i * $j);
+      }
+      //   .#{$bem}_#{$j}-5 {
+      //     flex-basis: calc(calc(100% / ($i)) * ($j + 0.25));
+      //   }
+    }
+  }
+}

@@ -7,7 +7,7 @@
 ```js
 import Vue from "vue";
 import Dialog from "@sugaz/gz-com/lib/dialog";
-import "@sugaz/gz-com/lib/theme-default/dialog.scss";
+import "@sugaz/gz-com/lib/theme-default/dialog.css";
 
 Vue.use(Dialog);
 ```

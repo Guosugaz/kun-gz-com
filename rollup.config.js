@@ -7,7 +7,7 @@ import jsImpoerSass from "./rollup-plugin-js-import-sass";
 import clear from "rollup-plugin-clear";
 
 const isProd = process.env.NODE_ENV === "production";
-const components = ["async-message-box", "dialog"];
+const components = ["async-message-box", "dialog", "group", "group-item"];
 
 const plugins = [
   nodeResolve(),
