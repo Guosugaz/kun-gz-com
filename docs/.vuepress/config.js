@@ -15,6 +15,7 @@ module.exports = {
       ["/AsyncMessageBox/", "AsyncMessageBox"],
       ["/Dialog/", "Dialog"],
       ["/Group/", "Group"],
+      ["/DatePickerRange/", "DatePickerRange"],
     ],
     nav: [
       { text: 'Github', link: 'https://github.com/Guosugaz/kun-el-com', target:'_blank' }
