@@ -15,6 +15,7 @@ yarn add @sugaz/gz-com
 ```js
 import Vue from "vue";
 import GzCom from "@sugaz/gz-com";
+import "@sugaz/gz-com/lib/theme-default/index.css";
 
 Vue.use(GzCom);
 ```
