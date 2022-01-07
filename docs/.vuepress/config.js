@@ -16,6 +16,7 @@ module.exports = {
       ["/Dialog/", "Dialog"],
       ["/Group/", "Group"],
       ["/DatePickerRange/", "DatePickerRange"],
+      ["/Table/", "Table"],
     ],
     nav: [
       { text: 'Github', link: 'https://github.com/Guosugaz/kun-el-com', target:'_blank' }

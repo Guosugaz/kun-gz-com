@@ -14,6 +14,7 @@ const components = [
   "group",
   "group-item",
   "date-picker-range",
+  "table"
 ];
 
 const plugins = [
