@@ -8,11 +8,12 @@ import clear from "rollup-plugin-clear";
 
 const isProd = process.env.NODE_ENV === "production";
 const components = [
+  "GZCOM",
   "async-message-box",
   "dialog",
   "group",
   "group-item",
-  "date-picker-range"
+  "date-picker-range",
 ];
 
 const plugins = [
