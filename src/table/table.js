@@ -1,4 +1,4 @@
-import { isDef } from "@sugaz/utils";
+import { isDef } from "@sugaz/gz-com/lib/utils/index.js";
 
 export default {
   name: "GzTable",

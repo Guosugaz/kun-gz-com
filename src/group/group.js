@@ -1,4 +1,4 @@
-import { isDef, throttle } from "@sugaz/utils";
+import { isDef, throttle } from "@sugaz/gz-com/lib/utils/index.js";
 const bem = "gz-group";
 
 export default {

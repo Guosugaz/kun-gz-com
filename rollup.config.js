@@ -20,7 +20,10 @@ const components = [
 const plugins = [
   nodeResolve(),
   alias({
-    entries: [{ find: "@", replacement: "src" }]
+    entries: [
+      { find: "@", replacement: "src" },
+      { find: "@sugaz/gz-com/lib/utils", replacement: "core/utils" }
+    ]
   }),
   vue(),
   jsImpoerSass(),
@@ -41,16 +44,18 @@ if (isProd) {
 
 const external = ["element-ui"];
 
-const componentsConfig = components.map((name) => ({
-  input: `src/${name}/index.js`,
-  output: {
-    name,
-    file: `lib/${name}/index.js`,
-    format: "es"
-  },
-  plugins,
-  external
-}));
+const componentsConfig = components.map((name) => {
+  return {
+    input: `src/${name}/index.js`,
+    output: {
+      name,
+      file: `lib/${name}/index.js`,
+      format: "es"
+    },
+    plugins,
+    external: [...external, "@sugaz/gz-com/lib/utils/index.js"]
+  };
+});
 
 const indexConfig = {
   input: "src/index.js",
@@ -63,4 +68,20 @@ const indexConfig = {
   external
 };
 
-export default [...componentsConfig, indexConfig];
+const utilsConfig = {
+  input: "core/utils/index.js",
+  output: {
+    name: "index",
+    file: `lib/utils/index.js`,
+    format: "es"
+  },
+  plugins: [
+    nodeResolve(),
+    getBabelOutputPlugin({
+      presets: ["@babel/preset-env"],
+      plugins: [["@babel/plugin-transform-runtime"]]
+    })
+  ]
+};
+
+export default [utilsConfig, ...componentsConfig, indexConfig];

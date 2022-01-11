@@ -1,4 +1,5 @@
 node_modules
 docs/.vuepress/.*
+docs/.vuepress/dist
 yarn-error.log
 lib

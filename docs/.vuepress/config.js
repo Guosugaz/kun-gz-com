@@ -5,7 +5,8 @@ module.exports = {
   description: "封装平时搭建的通用组件",
   plugins: ["demo-container"],
   alias: {
-    "@lib": path.resolve(__dirname, "../lib")
+    "@lib": path.resolve(__dirname, "../lib"),
+    "@sugaz/gz-com/lib": path.resolve(__dirname, "../lib"),
   },
   themeConfig: {
     logo: "/logo.gif",

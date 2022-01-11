@@ -51,7 +51,7 @@
    * @see https://element.eleme.cn/#/zh-CN/component/dialog
    */
   import variables from "@/theme-default/common/variables.scss";
-  import { isDef } from "@sugaz/utils";
+  import { isDef } from "@sugaz/gz-com/lib/utils/index.js";
 
   const bem = "gz-dialog";
   const widthList = variables.dialogWidthTypes.split(",");
