@@ -4,11 +4,11 @@ import Group from "./group/index.js";
 import GroupItem from "./group-item/index.js";
 import DatePickerRange from "./date-picker-range/index.js";
 import Table from "./table/index.js";
-import GZCOM from "./GZCOM/index.js";
+import GzCom from "./gz-com/index.js";
 
 export default {
   install(Vue) {
-    Vue.use(GZCOM)
+    Vue.use(GzCom)
       .use(AsyncMessageBox)
       .use(Dialog)
       .use(Group)
@@ -21,6 +21,6 @@ export default {
   Group,
   GroupItem,
   DatePickerRange,
-  GZCOM,
+  GzCom,
   Table
 };

@@ -1,11 +1,12 @@
 {
   "name": "@sugaz/gz-com",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "1.0.2",
+  "main": "lib/index.js",
   "author": "Guosugaz",
   "license": "MIT",
   "scripts": {
     "dev": "concurrently \"npm run docs:dev\" \"npm run com:dev\" \"npm run theme:dev\"",
+    "build": "concurrently \"npm run com:build\" \"npm run theme:build\"",
     "com:dev": "cross-env NODE_ENV=development rollup -c -w -m",
     "theme:dev": "cross-env NODE_ENV=development gulp dev",
     "docs:dev": "vuepress dev docs",
