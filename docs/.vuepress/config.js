@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  base: "/kun-gz-com",
+  base: "/kun-gz-com/dist",
   dest: path.resolve(__dirname, "../../dist"),
   title: "GzCom",
   description: "封装平时搭建的通用组件",
