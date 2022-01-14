@@ -19,16 +19,23 @@ $bem: gz-dialog;
     transform: translateY(-50%) !important;
   }
   &-body {
+    box-sizing: border-box;
     margin-bottom: 0 !important;
-    padding: 0 15px;
+    padding: 0 $wrapPaddingLeftRight 8px;
     overflow-x: hidden;
     @include scrollBar;
   }
   &-title {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
+    padding: 15px 0;
     font-size: 18px;
+    &_left,
+    &_right {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    &_right {
+      float: right;
+    }
 
     .icon {
       margin-left: 10px;
@@ -41,16 +48,19 @@ $bem: gz-dialog;
       }
     }
   }
+  &-footer {
+    padding: 8px 0;
+  }
 
   .el-dialog {
     &__header {
-      padding: 15px $wrapPaddingLeftRight;
+      padding: 0 $wrapPaddingLeftRight;
     }
     &__body {
-      padding: 5px;
+      padding: 0;
     }
     &__footer {
-      padding: 8px $wrapPaddingLeftRight;
+      padding: 0 $wrapPaddingLeftRight;
       background: rgba(245, 245, 245);
     }
   }

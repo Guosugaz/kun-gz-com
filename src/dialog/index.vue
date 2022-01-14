@@ -11,9 +11,9 @@
     :close-on-click-modal="closeOnClickModal"
     @close="handleCancel"
   >
-    <div slot="title" :class="`${bem}-title`">
-      {{ title }}
-      <div>
+    <div slot="title" ref="title" :class="`${bem}-title`">
+      <div  :class="`${bem}-title_left`">{{ title }}</div>
+      <div :class="`${bem}-title_right`">
         <!-- 刷新按钮 -->
         <i
           v-if="refresh"
@@ -39,7 +39,7 @@
     <div :style="bodyStyle" :class="`${bem}-body`">
       <slot />
     </div>
-    <div slot="footer" class="dialog-footer">
+    <div v-if="$slots.footer" ref="footer" slot="footer" :class="`${bem}-footer`">
       <slot name="footer" />
     </div>
   </el-dialog>
@@ -114,14 +114,20 @@
     computed: {
       bodyStyle() {
         if (this.isFullscreen) {
-          return { height: "calc(100vh - 49px - 66px)" };
+          let footerHieght = 0;
+          let titleHieght = 0;
+          if (this.$slots?.footer) {
+            footerHieght = this.$refs.footer?.offsetHeight || 0;
+          }
+          titleHieght = this.$refs.title?.offsetHeight || 0;
+          return { height: `calc(100vh - ${titleHieght}px - ${footerHieght}px)` };
         } else {
           return { "max-height": "70vh" };
         }
       },
       // 容器的宽度
       wrapWidth() {
-        if (this.isFullscreen) return "100vw";
+        if (this.isFullscreen) return "100%";
 
         const index = widthList.indexOf(this.width);
         const widthRange = variables.dialogWidthRange.split(",");
