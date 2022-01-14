@@ -21,7 +21,7 @@ Vue.use(GzCom);
 
 /* 或写为
  * Vue.use(GzCom, {
- *   // GZCOM 配置，下面有说明
+ *   // GzCom 配置，下面有说明
  * });
  */
 ```
@@ -45,7 +45,7 @@ npm install babel-plugin-component -D
     [
       "component",
       {
-        "libraryName": "gz-com",
+        "libraryName": "@sugaz/gz-com",
         "styleLibraryName": "theme-default"
       }
     ]
@@ -57,10 +57,10 @@ npm install babel-plugin-component -D
 
 ```js
 import Vue from "vue";
-import { Group, GZCOM } from "gz-com";
+import { Group, GzCom } from "@sugaz/gz-com";
 import App from "./App.vue";
 
-Vue.use(GZCOM); // 全局初始化配置
+Vue.use(GzCom); // 全局初始化配置
 Vue.use(Group);
 /* 或写为
  * Vue.component("your-group"), Group);
@@ -72,15 +72,15 @@ new Vue({
 });
 ```
 
-### GZCOM 配置
+### GzCom 配置
 
 引入该库时，有些组件会使用到全局配置，如`Table`组件，在<strong>按需引用</strong>时必须要手动引入
 
 ```js
 import Vue from "vue";
-import { GZCOM } from "gz-com";
+import { GzCom } from "@sugaz/gz-com";
 
-Vue.use(GZCOM, {
+Vue.use(GzCom, {
   /* options */
 });
 ```

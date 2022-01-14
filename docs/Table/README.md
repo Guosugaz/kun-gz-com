@@ -6,10 +6,11 @@
 
 ```js
 import Vue from "vue";
-import GZCOM from "@sugaz/gz-com/lib/GZCOM";
+import GzCom from "@sugaz/gz-com/lib/gz-com";
 import Table from "@sugaz/gz-com/lib/table";
+import "@sugaz/gz-com/lib/theme-default/table.css";
 
-Vue.use(GZCOM).use(Table);
+Vue.use(GzCom).use(Table);
 ```
 
 ### 示例
