@@ -1,13 +1,11 @@
 const path = require("path");
 
 module.exports = {
+  base: "/kun-gz-com",
+  dest: path.resolve(__dirname, "../../dist"),
   title: "GzCom",
   description: "封装平时搭建的通用组件",
   plugins: ["demo-container"],
-  alias: {
-    "@lib": path.resolve(__dirname, "../lib"),
-    "@sugaz/gz-com/lib": path.resolve(__dirname, "../lib"),
-  },
   themeConfig: {
     logo: "/logo.gif",
     sidebarDepth: 0,
