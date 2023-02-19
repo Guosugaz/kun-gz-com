@@ -6,24 +6,24 @@ import alias from "@rollup/plugin-alias";
 import jsImpoerSass from "./rollup-plugin-js-import-sass";
 import clear from "rollup-plugin-clear";
 import { DEFAULT_EXTENSIONS } from "@babel/core";
-import typescript from 'rollup-plugin-typescript2';
+import typescript from "rollup-plugin-typescript2";
 
 const isProd = process.env.NODE_ENV === "production";
 const components = [
   // "gz-com",
   // "async-message-box",
   // "dialog",
-  "group"
-  // "group-item",
+  "group",
+  "group-item"
   // "date-picker-range",
   // "table"
 ];
 
-const external = ["element-plus"];
+const external = ["element-plus", "vue", "rxjs"];
 
 const componentsConfig = components.map((name) => {
   return {
-    input: `src/${name}/index.js`,
+    input: `src/${name}/index.ts`,
     output: {
       name,
       file: `lib/${name}/index.js`,
@@ -37,6 +37,7 @@ const componentsConfig = components.map((name) => {
           { find: /@core\/(.+)/, replacement: "@sugaz/gz-com/lib/$1" }
         ]
       }),
+      typescript(/*{ plugin options }*/),
       vue(),
       jsImpoerSass(),
       getBabelOutputPlugin({
@@ -44,7 +45,7 @@ const componentsConfig = components.map((name) => {
         plugins: [["@babel/plugin-transform-runtime"]]
       })
     ],
-    external: [...external, "@sugaz/gz-com"]
+    external: [...external, /@sugaz\/gz-com\/.+/]
   };
 });
 
@@ -93,9 +94,9 @@ const utilsConfig = {
   ]
 };
 
-const configs = [utilsConfig].map((item) => {
+const configs = [utilsConfig, ...componentsConfig].map((item) => {
   if (isProd) item.plugins.push(terser());
   return item;
 });
 
-export default utilsConfig;
+export default configs;

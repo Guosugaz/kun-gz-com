@@ -1,6 +1,8 @@
+import { defineComponent } from "vue";
+
 const bem = "gz-group-item";
 
-export default {
+export default defineComponent({
   name: "GzGroupItem",
   props: {
     span: {
@@ -27,7 +29,7 @@ export default {
   },
   computed: {
     parentLabelWidth() {
-      let parent = this.$parent;
+      let parent: any = this.$parent;
       let parentName = parent.$options.componentName;
       while (parent.$options && parentName !== "GzGroup") {
         parent = parent.$parent;
@@ -40,7 +42,7 @@ export default {
       return after ? `${num}-5` : this.span;
     }
   },
-  render(h) {
+  render(h: any) {
     const { label, customClass, parentLabelWidth, spanClass, align } = this;
     const width = this.width || parentLabelWidth;
     const labelWarp = () => {
@@ -65,4 +67,4 @@ export default {
       ]
     );
   }
-};
+});
