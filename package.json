@@ -9,10 +9,10 @@
     "build": "concurrently \"npm run com:build\" \"npm run theme:build\"",
     "com:dev": "cross-env NODE_ENV=development rollup -c -w -m",
     "theme:dev": "cross-env NODE_ENV=development gulp dev",
-    "docs:dev": "vuepress dev docs",
+    "docs:dev": "vitepress dev docs",
     "com:build": "cross-env NODE_ENV=production rollup -c",
     "theme:build": "cross-env NODE_ENV=production gulp build",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vitepress build docs"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
@@ -41,7 +41,6 @@
     "tslib": "^2.5.0",
     "typescript": "^4.9.5",
     "vite": "^4.0.4",
-    "vuepress": "1.7.0",
     "vuepress-plugin-demo-container": "^0.2.0"
   },
   "dependencies": {
@@ -49,6 +48,7 @@
     "element-ui": "^2.15.6",
     "rxjs": "^7.8.0",
     "sass": "^1.45.0",
+    "vitepress": "^1.0.0-alpha.47",
     "vue": "^3.2.45"
   },
   "browserslist": [
