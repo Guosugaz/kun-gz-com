@@ -17,10 +17,6 @@
   </div>
 </template>
 
-<script>
-import 'ant-design-vue/lib/timeline/style/index.css';
-</script>
-
 <style scoped>
 .log {
   margin-top: 50px;

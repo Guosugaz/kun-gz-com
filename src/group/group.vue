@@ -3,7 +3,7 @@
  * @Author: Guosugaz
  * @LastEditors: Guosugaz
  * @Date: 2023-02-19 20:13:15
- * @LastEditTime: 2023-03-09 11:47:56
+ * @LastEditTime: 2023-03-09 17:08:56
 -->
 <template>
   <div :id="id" :class="wrapClass">
@@ -47,7 +47,7 @@
     (
       e: "change-grid",
       data: {
-        wrapWidth: number;
+        wrapWidth?: number;
         grid: number;
       }
     ): void;
@@ -81,6 +81,7 @@
     },
     { immediate: true }
   );
+
   onMounted(() => {
     if (!isDef(props.grid)) {
       registerAutoGrid();
@@ -100,10 +101,11 @@
 
   function handleGrid() {
     // 自动时适应根据块的宽度判断设置grid
-    const width = (document.querySelector(`#${id.value}`) as HTMLElement)
-      ?.offsetWidth;
+    const width = document.querySelector<HTMLElement>(
+      `#${id.value}`
+    )?.offsetWidth;
     if (!props.grid) {
-      if (!isDef(width)) {
+      if (!width) {
         mapGrid.value = 4;
       } else if (width >= 1600) {
         mapGrid.value = 7;

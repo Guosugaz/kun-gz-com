@@ -9,10 +9,11 @@
     "build": "concurrently \"npm run com:build\" \"npm run theme:build\"",
     "com:dev": "cross-env NODE_ENV=development rollup -c -w -m",
     "theme:dev": "cross-env NODE_ENV=development gulp dev",
-    "docs:dev": "vitepress dev docs",
+    "docs:dev": "vitepress dev",
     "com:build": "cross-env NODE_ENV=production rollup -c",
     "theme:build": "cross-env NODE_ENV=production gulp build",
-    "docs:build": "vitepress build docs"
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",

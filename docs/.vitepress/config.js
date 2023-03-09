@@ -5,6 +5,7 @@ import common from "./utils/common";
 
 module.exports = {
   base: "/kun-gz-com/dist/",
+  outDir: "../dist",
   // dest: path.resolve(__dirname, "../../dist"),
   title: "Gz-UI",
   // description: "封装平时搭建的通用组件",
