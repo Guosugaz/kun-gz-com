@@ -5,7 +5,7 @@
   "author": "Guosugaz",
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently \"npm run docs:dev\" \"npm run com:dev\" \"npm run theme:dev\"",
+    "dev": "concurrently \"npm run com:dev\" \"npm run theme:dev\"",
     "build": "concurrently \"npm run com:build\" \"npm run theme:build\"",
     "com:dev": "cross-env NODE_ENV=development rollup -c -w -m",
     "theme:dev": "cross-env NODE_ENV=development gulp dev",
@@ -44,8 +44,10 @@
     "vuepress-plugin-demo-container": "^0.2.0"
   },
   "dependencies": {
+    "@sugaz/gz-com": "^1.0.3",
     "element-plus": "^2.2.28",
-    "element-ui": "^2.15.6",
+    "markdown-it-container": "^3.0.0",
+    "prismjs": "^1.29.0",
     "rxjs": "^7.8.0",
     "sass": "^1.45.0",
     "vitepress": "^1.0.0-alpha.47",

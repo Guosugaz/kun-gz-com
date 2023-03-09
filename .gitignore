@@ -1,5 +1,5 @@
 node_modules
-docs/.vuepress/.*
-docs/.vuepress/dist
+docs/.vitepress/cache/*
+docs/.vitepress/dist/*
 yarn-error.log
 lib

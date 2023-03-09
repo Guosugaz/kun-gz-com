@@ -1,9 +1,14 @@
-import { defineComponent } from "vue";
+import { defineComponent, h } from "vue";
 
 const bem = "gz-group-item";
 
 export default defineComponent({
   name: "GzGroupItem",
+  inject: {
+    GzGroup: {
+      default: () => ({ labelWidth: "90px" })
+    }
+  },
   props: {
     span: {
       type: [String, Number],
@@ -29,24 +34,18 @@ export default defineComponent({
   },
   computed: {
     parentLabelWidth() {
-      let parent: any = this.$parent;
-      let parentName = parent.$options.componentName;
-      while (parent.$options && parentName !== "GzGroup") {
-        parent = parent.$parent;
-        parentName = parent.$options.componentName;
-      }
-      return parent ? parent.labelWidth : "90px";
+      return (this.GzGroup as any).labelWidth ?? "90px";
     },
     spanClass() {
       const [num, after] = String(this.span).split(".");
       return after ? `${num}-5` : this.span;
     }
   },
-  render(h: any) {
+  render() {
     const { label, customClass, parentLabelWidth, spanClass, align } = this;
     const width = this.width || parentLabelWidth;
     const labelWarp = () => {
-      const wrap = this.$slots.label || label;
+      const wrap = this.$slots.label ? this.$slots.label() : label;
       if (wrap) {
         return h("span", { class: `${bem}_label`, style: { width } }, wrap);
       }
@@ -62,7 +61,7 @@ export default defineComponent({
         h(
           "span",
           { class: `${bem}_content ${bem}_content_${align}` },
-          this.$slots.default
+          this.$slots.default && this.$slots.default()
         )
       ]
     );

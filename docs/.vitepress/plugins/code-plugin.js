@@ -47,7 +47,7 @@ export const markdownConfig = (md) => {
       if (tokens[idx].nesting === 1) {
         const sourceFile = m && m.length > 1 ? m[1] : '';
         // 源码文件路径
-        const filePath = path.resolve(__dirname, '../examples', `${sourceFile}`);
+        const filePath = path.resolve(__dirname, '../../codes', `${sourceFile}`);
         let source = fs.readFileSync(filePath, 'utf-8');
         if (!source)
           throw new Error(`Incorrect source file: ${sourceFile}`);

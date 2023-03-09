@@ -1,12 +1,7 @@
 const path = require("path");
-import { markdownConfig } from './plugins/code-plugin';
-import guide from './utils/guide.js';
-import general from './utils/general.js';
-import layout from './utils/layout.js';
-import feedback from './utils/feedback.js';
-import dataEntry from './utils/dataEntry.js';
-import dataDisplay from './utils/dataDisplay.js';
-import router from './utils/router.js';
+import { markdownConfig } from "./plugins/code-plugin";
+import guide from "./utils/guide.js";
+import common from "./utils/common";
 
 module.exports = {
   base: "/kun-gz-com/dist/",
@@ -18,38 +13,35 @@ module.exports = {
   markdown: {
     config: markdownConfig
   },
-  head: [
-    [
-      'link', { rel: 'icon', href: '/logo.svg' }
-    ]
-  ],
+  head: [["link", { rel: "icon", href: "/logo.svg" }]],
   themeConfig: {
     logo: "/logo.gif",
     sidebarDepth: 0,
-    siteTitle: 'Gz-UI',
+    siteTitle: "Gz-UI",
+    aside: false,
     nav: [
-      { text: '开发指南', link: '/guide/start' },
-      { text: '组件使用', link: '/examples/button/' }
+      { text: "开发指南", link: "/guide/start" },
+      { text: "组件使用", link: "/examples/Group/" }
     ],
-    socialLinks: [{ icon: 'github', link: 'https://github.com/aiai0603' }],
+    socialLinks: [{ icon: "github", link: "https://github.com/aiai0603" }],
     sidebar: {
-      '/guide/': guide,
-      '/examples/': [general, layout, feedback, dataEntry, dataDisplay, router]
+      "/guide/": guide,
+      "/examples/": [common]
     },
-    sidebar: [
-      ["/", "快速上手"],
-      // ["/AsyncMessageBox/", "AsyncMessageBox"],
-      // ["/Dialog/", "Dialog"],
-      ["/Group/", "Group"],
-      // ["/DatePickerRange/", "DatePickerRange"],
-      // ["/Table/", "Table"],
-    ],
+    // sidebar: [
+    //   ["/", "快速上手"],
+    //   // ["/AsyncMessageBox/", "AsyncMessageBox"],
+    //   // ["/Dialog/", "Dialog"],
+    //   ["/Group/", "Group"],
+    //   // ["/DatePickerRange/", "DatePickerRange"],
+    //   // ["/Table/", "Table"],
+    // ],
     // nav: [
     //   { text: 'Github', link: 'https://github.com/Guosugaz/kun-el-com', target:'_blank' }
     // ],
     docFooter: {
-      prev: '上一篇',
-      next: '下一篇'
-    },
+      prev: "上一篇",
+      next: "下一篇"
+    }
   }
 };

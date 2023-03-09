@@ -6,14 +6,6 @@ const guide = [
         text: '快速开始',
         link: '/guide/start'
       },
-      {
-        text: '更新日志',
-        link: '/guide/log'
-      },
-      {
-        text: '其他',
-        link: '/guide/details'
-      }
     ]
   }
 ];

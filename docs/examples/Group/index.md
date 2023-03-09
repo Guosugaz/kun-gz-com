@@ -17,54 +17,9 @@ Vue.use(GroupItem);
 
 ### 示例
 
-:::demo `group`的`labelWidth`可以统一修改`group-item`的 label 宽度，若`group`不传`grid`就是自动计算每列的 item 数量
+`group`的`labelWidth`可以统一修改`group-item`的 label 宽度，若`group`不传`grid`就是自动计算每列的 item 数量
 
-```html
-<template>
-  <div>
-    <gz-group labelWidth="80px" grid="3">
-      <gz-group-item label="名称" span="1">
-        <span slot="label">
-          名称
-          <el-tooltip effect="dark" content="最多4位" placement="top-start">
-            <i class="el-icon-warning" />
-          </el-tooltip>
-        </span>
-        <el-input v-model="form.input" placeholder="请输入内容"></el-input>
-      </gz-group-item>
-      <gz-group-item label="年龄">
-        <el-input v-model="form.input" placeholder="请输入内容"></el-input>
-      </gz-group-item>
-      <gz-group-item label="地址">
-        <el-input v-model="form.input" placeholder="请输入内容"></el-input>
-      </gz-group-item>
-      <gz-group-item label="身高">
-        <el-input v-model="form.input" placeholder="请输入内容"></el-input>
-      </gz-group-item>
-      <gz-group-item label="体重">
-        <el-input v-model="form.input" placeholder="请输入内容"></el-input>
-      </gz-group-item>
-      <gz-group-item align="right">
-        <el-button>清空</el-button>
-        <el-button type="primary">搜索</el-button>
-      </gz-group-item>
-    </gz-group>
-  </div>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        form: {
-          input: ""
-        }
-      };
-    }
-  };
-</script>
-```
-
+:::code Group/index.vue
 :::
 
 ### Group props

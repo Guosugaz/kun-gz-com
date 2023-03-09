@@ -50,25 +50,26 @@ const componentsConfig = components.map((name) => {
 });
 
 const indexConfig = {
-  input: "src/index.js",
+  input: "src/index.ts",
   output: {
     name: "index",
     file: `lib/index.js`,
-    format: "umd"
+    format: "es"
   },
   plugins: [
     nodeResolve(),
     alias({
       entries: [
         { find: "@", replacement: "src" },
-        { find: "@sugaz/gz-com/lib/utils", replacement: "core/utils" }
+        { find: /@core\/(.+)/, replacement: "core/$1" }
       ]
     }),
+    typescript(/*{ plugin options }*/),
     vue(),
     jsImpoerSass(),
-    babel({
-      presets: ["@babel/preset-env"]
-    })
+    // getBabelOutputPlugin({
+    //   presets: ["@babel/env", { modules: "umd" }]
+    // })
   ],
   external
 };
@@ -94,7 +95,7 @@ const utilsConfig = {
   ]
 };
 
-const configs = [utilsConfig, ...componentsConfig].map((item) => {
+const configs = [utilsConfig, indexConfig, ...componentsConfig].map((item) => {
   if (isProd) item.plugins.push(terser());
   return item;
 });

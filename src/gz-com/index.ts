@@ -3,8 +3,10 @@
  * @Author: Guosugaz
  * @LastEditors: Guosugaz
  * @Date: 2022-01-07 09:50:32
- * @LastEditTime: 2022-01-07 12:45:41
+ * @LastEditTime: 2023-03-07 10:31:36
  */
+import type { App } from "vue";
+
 const defaultOptions = {
   table: {
     border: true,
@@ -19,7 +21,7 @@ const defaultOptions = {
 };
 
 export default {
-  install(Vue, options = {}) {
-    Vue.prototype.$GZCOM = Object.assign({}, defaultOptions, options);
+  install(app: App, options = {}) {
+    app.config.globalProperties.$GZCOM = Object.assign({}, defaultOptions, options);
   }
 };
