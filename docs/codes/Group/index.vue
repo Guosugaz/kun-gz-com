@@ -1,6 +1,6 @@
 <template>
   <div>
-    <gz-group labelWidth="80px" grid="3">
+    <gz-group grid="3">
       <gz-group-item span="1">
         <template #label>
           <span>

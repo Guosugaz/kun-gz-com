@@ -19,7 +19,7 @@ const components = [
   // "table"
 ];
 
-const external = ["element-plus", "vue", "rxjs"];
+const external = ["element-plus", /element-plus\/.+/, "vue", "rxjs"];
 
 const componentsConfig = components.map((name) => {
   return {
@@ -37,7 +37,9 @@ const componentsConfig = components.map((name) => {
           { find: /@core\/(.+)/, replacement: "@sugaz/gz-com/lib/$1" }
         ]
       }),
-      typescript(/*{ plugin options }*/),
+      typescript({
+        check: false
+      }),
       vue(),
       jsImpoerSass(),
       getBabelOutputPlugin({
@@ -64,9 +66,11 @@ const indexConfig = {
         { find: /@core\/(.+)/, replacement: "core/$1" }
       ]
     }),
-    typescript(/*{ plugin options }*/),
+    typescript({
+      check: false
+    }),
     vue(),
-    jsImpoerSass(),
+    jsImpoerSass()
     // getBabelOutputPlugin({
     //   presets: ["@babel/env", { modules: "umd" }]
     // })
@@ -75,10 +79,16 @@ const indexConfig = {
 };
 
 const utilsConfig = {
-  input: "core/utils/index.ts",
+  input: {
+    "utils/index": "core/utils/index.ts",
+    "hooks/index": "core/hooks/index.ts",
+    "config-provider": "core/config-provider.ts"
+  },
   output: {
-    name: "index",
-    file: `lib/utils/index.js`,
+    // name: "index",
+    // file: `lib/utils/index.js`,
+    dir: "lib",
+    entryFileNames: "[name].js",
     format: "es"
   },
   plugins: [
@@ -92,7 +102,8 @@ const utilsConfig = {
       presets: ["@babel/preset-env"],
       plugins: [["@babel/plugin-transform-runtime"]]
     })
-  ]
+  ],
+  external
 };
 
 const configs = [utilsConfig, indexConfig, ...componentsConfig].map((item) => {

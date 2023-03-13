@@ -3,7 +3,7 @@
  * @Author: Guosugaz
  * @LastEditors: Guosugaz
  * @Date: 2023-02-19 20:13:15
- * @LastEditTime: 2023-03-09 17:08:56
+ * @LastEditTime: 2023-03-13 13:53:19
 -->
 <template>
   <div :id="id" :class="wrapClass">
@@ -31,18 +31,12 @@
     toRefs,
     watch
   } from "vue";
+  import { groupProps } from "./group-props";
+
   const bem = "gz-group";
   const id = ref(bem + +new Date());
 
-  const props = withDefaults(
-    defineProps<{
-      grid?: string | number;
-      labelWidth?: string;
-    }>(),
-    {
-      labelWidth: "90px"
-    }
-  );
+  const props = defineProps(groupProps);
   const emit = defineEmits<{
     (
       e: "change-grid",

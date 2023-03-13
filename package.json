@@ -9,7 +9,7 @@
     "build": "concurrently \"npm run com:build\" \"npm run theme:build\"",
     "com:dev": "cross-env NODE_ENV=development rollup -c -w -m",
     "theme:dev": "cross-env NODE_ENV=development gulp dev",
-    "docs:dev": "vitepress dev",
+    "docs:dev": "vitepress dev docs",
     "com:build": "cross-env NODE_ENV=production rollup -c",
     "theme:build": "cross-env NODE_ENV=production gulp build",
     "docs:build": "vitepress build docs",

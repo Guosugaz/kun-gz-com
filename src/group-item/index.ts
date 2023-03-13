@@ -1,4 +1,4 @@
-import GroupItem from "./group-item";
+import GroupItem from "./group-item.vue";
 import type { App } from "vue";
 
 GroupItem.install = function (app: App) {
