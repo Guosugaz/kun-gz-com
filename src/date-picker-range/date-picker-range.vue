@@ -5,11 +5,24 @@
     :format="format"
     :value-format="valueFormat"
     :type="type"
-  />
+    start-placeholder="开始时间"
+    end-placeholder="结束时间"
+    :disabled-date="hadnleDisabledDate"
+    @focus="handleFocus"
+    @calendar-change="handleCalendarChange"
+  >
+    <slot name="range-separator" />
+    <slot />
+  </el-date-picker>
 </template>
 
+<script lang="ts">
+  export default defineComponent({
+    name: "GzDatePicker"
+  });
+</script>
 <script setup lang="ts">
-  import { computed } from "vue";
+  import { computed, defineComponent, ref, watch } from "vue";
   import { isDef } from "@core/utils";
   import { useVModels } from "@vueuse/core";
 
@@ -22,19 +35,23 @@
       end: Value;
       format?: string;
       valueFormat?: string;
+      disabledDate?: (val: Date, choose: Date | null) => void;
     }>(),
     {
       type: "daterange",
-      format: "yyyy-MM-dd",
-      valueFormat: "yyyy-MM-dd"
+      format: "YYYY-MM-DD",
+      valueFormat: "YYYY-MM-DD"
     }
   );
   const emit = defineEmits<{
     (e: "update:start", val: string): void;
     (e: "update:end", val: string): void;
     (e: "change", val: Value[]): void;
+    (e: "focus"): void;
+    (e: "calendarChange", val: any[]): void;
   }>();
   const { start, end } = useVModels(props, emit);
+  const chooseVal = ref<Date | null>(null);
 
   const dv = computed(() => {
     if (typeof start.value === "number" || !isDef(start.value)) {
@@ -62,4 +79,26 @@
       emit("change", val);
     }
   });
+
+  watch(start, (val) => {
+    if (!val) chooseVal.value = null;
+  })
+
+  function handleFocus() {
+    chooseVal.value = null;
+    emit("focus");
+  }
+
+  function handleCalendarChange(val: Date[]) {
+    const [pointDay] = val;
+    chooseVal.value = pointDay;
+    emit("calendarChange", val);
+  }
+
+  function hadnleDisabledDate(val: any) {
+    if (props.disabledDate) {
+      return props.disabledDate(val, chooseVal.value);
+    }
+    return false;
+  }
 </script>

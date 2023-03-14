@@ -14,8 +14,8 @@ const components = [
   // "async-message-box",
   // "dialog",
   "group",
-  "group-item"
-  // "date-picker-range",
+  "group-item",
+  "date-picker-range",
   // "table"
 ];
 

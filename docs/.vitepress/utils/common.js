@@ -7,6 +7,10 @@ const common = {
       text: "Group",
       link: "/examples/Group/"
     },
+    {
+      text: "DatePickerRange",
+      link: "/examples/DatePickerRange/"
+    },
   ]
 };
 
