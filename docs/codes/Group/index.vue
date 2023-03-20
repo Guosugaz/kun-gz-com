@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <ClientOnly>
     <gz-group grid="3">
       <gz-group-item span="1">
         <template #label>
@@ -29,7 +29,7 @@
         <el-button type="primary">搜索</el-button>
       </gz-group-item>
     </gz-group>
-  </div>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">

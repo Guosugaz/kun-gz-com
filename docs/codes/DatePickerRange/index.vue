@@ -1,22 +1,24 @@
 <template>
-  <gz-group labelWidth="80px" grid="3">
-    <gz-group-item label="默认">
-      <gz-date-picker v-model:start="query.start1" v-model:end="query.end1" />
-    </gz-group-item>
-    <gz-group-item label="结果">
-      {{ query.start1 }} - {{ query.end1 }}
-    </gz-group-item>
-    <gz-group-item label="限制30天">
-      <gz-date-picker
-        v-model:start="query.start2"
-        v-model:end="query.end2"
-        :disabled-date="limtMonth"
-      />
-    </gz-group-item>
-    <gz-group-item label="结果">
-      {{ query.start2 }} - {{ query.end2 }}
-    </gz-group-item>
-  </gz-group>
+  <ClientOnly>
+    <gz-group labelWidth="80px" grid="3">
+      <gz-group-item label="默认">
+        <gz-date-picker v-model:start="query.start1" v-model:end="query.end1" />
+      </gz-group-item>
+      <gz-group-item label="结果">
+        {{ query.start1 }} - {{ query.end1 }}
+      </gz-group-item>
+      <gz-group-item label="限制30天">
+        <gz-date-picker
+          v-model:start="query.start2"
+          v-model:end="query.end2"
+          :disabled-date="limtMonth"
+        />
+      </gz-group-item>
+      <gz-group-item label="结果">
+        {{ query.start2 }} - {{ query.end2 }}
+      </gz-group-item>
+    </gz-group>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">

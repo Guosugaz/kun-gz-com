@@ -5,11 +5,10 @@ title: Seven-Bit-UI
 titleTemplate: 起始页
 
 hero:
-  name: Gz-Com-UI
-  text: gz组件
-  tagline: 使用vue3提取的通用组件
+  name: Common-UI
+  tagline: 使用vue3提取的公用组件
   image:
-    src: /logo.svg
+    src: /logo.gif
     alt: logo
   actions:
     - theme: brand

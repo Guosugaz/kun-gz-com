@@ -3,8 +3,8 @@ import "./custom.css";
 import "prismjs/themes/prism-coy.min.css";
 import CodeBox from "../components/CodeBox.vue";
 import Element from "element-plus";
-import GzCom from "@sugaz/gz-com";
-import "@sugaz/gz-com/lib/theme-default/index.css";
+import GzCom from "../../../src/index";
+import "../../../src/theme-default/index.scss";
 import "element-plus/dist/index.css";
 
 export default {

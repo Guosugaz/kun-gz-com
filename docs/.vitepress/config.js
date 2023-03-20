@@ -1,9 +1,10 @@
-const path = require("path");
 import { markdownConfig } from "./plugins/code-plugin";
 import guide from "./utils/guide.js";
 import common from "./utils/common";
+import path from "path";
+const cwd = String.raw`${process.cwd()}`.replace(/\\/g, "/");
 
-module.exports = {
+export default {
   base: "/kun-gz-com/dist/",
   outDir: "../dist",
   // dest: path.resolve(__dirname, "../../dist"),
@@ -15,6 +16,17 @@ module.exports = {
     config: markdownConfig
   },
   head: [["link", { rel: "icon", href: "/logo.svg" }]],
+  vite: {
+    resolve: {
+      alias: [
+        { find: "@", replacement: path.resolve(cwd, "src") },
+        {
+          find: "@core",
+          replacement: path.resolve(cwd, "core")
+        }
+      ]
+    }
+  },
   themeConfig: {
     logo: "/logo.gif",
     sidebarDepth: 0,

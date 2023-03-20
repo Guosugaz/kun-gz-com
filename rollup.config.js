@@ -1,9 +1,9 @@
 import vue from "@vitejs/plugin-vue";
-import babel, { getBabelOutputPlugin } from "@rollup/plugin-babel";
+import { getBabelOutputPlugin } from "@rollup/plugin-babel";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
 import alias from "@rollup/plugin-alias";
-import jsImpoerSass from "./rollup-plugin-js-import-sass";
+import jsImpoerSass from "./rollup-plugin-js-import-sass.js";
 import clear from "rollup-plugin-clear";
 import { DEFAULT_EXTENSIONS } from "@babel/core";
 import typescript from "rollup-plugin-typescript2";
@@ -15,7 +15,7 @@ const components = [
   // "dialog",
   "group",
   "group-item",
-  "date-picker-range",
+  "date-picker-range"
   // "table"
 ];
 
@@ -60,16 +60,14 @@ const indexConfig = {
   },
   plugins: [
     nodeResolve(),
+    vue({ isProduction: isProd }),
     alias({
       entries: [
         { find: "@", replacement: "src" },
         { find: /@core\/(.+)/, replacement: "core/$1" }
       ]
     }),
-    typescript({
-      check: false
-    }),
-    vue(),
+    typescript({ check: false }),
     jsImpoerSass()
     // getBabelOutputPlugin({
     //   presets: ["@babel/env", { modules: "umd" }]
@@ -96,7 +94,7 @@ const utilsConfig = {
       targets: ["lib"]
     }),
     nodeResolve(),
-    typescript(/*{ plugin options }*/),
+    typescript({ check: false }),
     getBabelOutputPlugin({
       extensions: [...DEFAULT_EXTENSIONS, ".ts", ".tsx"],
       presets: ["@babel/preset-env"],
@@ -106,7 +104,13 @@ const utilsConfig = {
   external
 };
 
-const configs = [utilsConfig, indexConfig, ...componentsConfig].map((item) => {
+function getList() {
+  const list = [utilsConfig, indexConfig];
+  if (isProd) list.concat(componentsConfig);
+  return list;
+}
+
+const configs = getList().map((item) => {
   if (isProd) item.plugins.push(terser());
   return item;
 });
