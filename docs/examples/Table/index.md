@@ -6,108 +6,15 @@
 
 ```js
 import Vue from "vue";
-import GzCom from "@sugaz/gz-com/lib/gz-com";
 import Table from "@sugaz/gz-com/lib/table";
 import "@sugaz/gz-com/lib/theme-default/table.css";
 
-Vue.use(GzCom).use(Table);
+Vue.use(Table);
 ```
 
 ### 示例
 
-:::demo
-
-```html
-<template>
-  <gz-table
-    :loading="loading"
-    :data="tableData.records"
-    :columns="columns"
-    :page="tableData"
-    :query.sync="query"
-    size="small"
-    align="center"
-    showOverflowTooltip
-    :pagination="pagination"
-    @update="getList"
-  >
-    <template #created_at="{ row }">
-      <i class="el-icon-time" />
-      <span>{{ row.display_time }}</span>
-    </template>
-  </gz-table>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        loading: false,
-        columns: [
-          { label: "ID", width: 50, type: "index" },
-          { label: "Title", prop: "title" },
-          { label: "Author", prop: "author", width: "110" },
-          { label: "Pageviews", prop: "pageviews", width: "110" },
-          {
-            label: "More",
-            // 多级表头
-            children: [
-              {
-                label: "Status",
-                width: "110",
-                template(h, { row: { status } }) {
-                  return (
-                    <el-tag type={status ? "success" : "warning"}>
-                      {status ? "正常" : "冻结"}
-                    </el-tag>
-                  );
-                }
-              },
-              { label: "Time", slot: "created_at", width: "200" }
-            ]
-          }
-        ],
-        pagination: {
-          layout: "total, sizes, prev, pager, next, jumper",
-          pageSizes: [10, 50, 100]
-        },
-        tableData: {},
-        query: {
-          size: 10,
-          current: 1
-        }
-      };
-    },
-    created() {
-      this.getList();
-    },
-    methods: {
-      getList() {
-        this.loading = true;
-        setTimeout(() => {
-          this.tableData = this.$Mock.mock({
-            [`records|${this.query.size}`]: [
-              {
-                id: "@id",
-                title: "@title",
-                author: "@name",
-                pageviews: "@last",
-                "status|0-1": 1,
-                display_time: "@date"
-              }
-            ],
-            total: 400,
-            current: this.query.current,
-            size: this.query.size
-          });
-          this.loading = false;
-        }, 400);
-      }
-    }
-  };
-</script>
-```
-
+:::code Table/index.vue
 :::
 
 ### Table props
@@ -139,4 +46,4 @@ Vue.use(GzCom).use(Table);
 
 | 事件名称 | 说明                                                  | 回调参数                  |
 | -------- | ----------------------------------------------------- | ------------------------- |
-| update   | 统一处理分页组件的`size-change`和`current-change`事件 | {[currentKey], [sizeKey]} |
+| update   | 统一处理分页组件的`size-change`和`current-change`事件 | `{[currentKey], [sizeKey]}` |

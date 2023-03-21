@@ -3,6 +3,7 @@ import guide from "./utils/guide.js";
 import common from "./utils/common";
 import path from "path";
 const cwd = String.raw`${process.cwd()}`.replace(/\\/g, "/");
+import vueJsx from "@vitejs/plugin-vue-jsx";
 
 export default {
   base: "/kun-gz-com/dist/",
@@ -25,7 +26,12 @@ export default {
           replacement: path.resolve(cwd, "core")
         }
       ]
-    }
+    },
+    plugins: [
+      vueJsx({
+        // options are passed on to @vue/babel-plugin-jsx
+      })
+    ]
   },
   themeConfig: {
     logo: "/logo.gif",

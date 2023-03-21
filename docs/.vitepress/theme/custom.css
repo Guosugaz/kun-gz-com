@@ -10,10 +10,20 @@
   --vp-c-brand-dark: var(--vp-c-brand-lighter);
   /* 标题 */
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient(92.06deg, #33c2ff -17.9%, #257cff 43.39%, #165dff 99.4%);
+  --vp-home-hero-name-background: linear-gradient(
+    92.06deg,
+    #33c2ff -17.9%,
+    #257cff 43.39%,
+    #165dff 99.4%
+  );
 
   /* 图标背景 */
-  --vp-home-hero-image-background-image: linear-gradient(92.06deg, #33c2ff -17.9%, #257cff 43.39%, #165dff 99.4%);
+  --vp-home-hero-image-background-image: linear-gradient(
+    92.06deg,
+    #33c2ff -17.9%,
+    #257cff 43.39%,
+    #165dff 99.4%
+  );
   --vp-home-hero-image-filter: blur(150px);
 }
 
@@ -134,6 +144,17 @@
 }
 
 /* 页脚的样式覆盖 */
-  .VPFooter .message a:hover {
-    color: #257cff;
-  }
+.VPFooter .message a:hover {
+  color: #257cff;
+}
+
+.el-table table {
+  margin: auto;
+  border: none;
+}
+.el-table__body tr {
+  border: none;
+}
+.el-table__cell {
+  width: auto !important;
+}

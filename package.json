@@ -47,6 +47,8 @@
   },
   "dependencies": {
     "@sugaz/gz-com": "^1.0.3",
+    "@types/mockjs": "^1.0.7",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
     "dayjs": "^1.11.7",
     "element-plus": "^2.2.28",
     "markdown-it-container": "^3.0.0",
