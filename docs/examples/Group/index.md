@@ -2,19 +2,6 @@
 
 > Group 常用与列表的筛选布局和表单的布局，可以根据屏幕大小自动计算每列放 item 的数量，注：Group 必选搭配 GroupItem 使用
 
-### 单独引入
-
-```js
-import Vue from "vue";
-import Group from "@sugaz/gz-com/lib/group";
-import GroupItem from "@sugaz/gz-com/lib/group-item";
-import "@sugaz/gz-com/lib/theme-default/group.css";
-import "@sugaz/gz-com/lib/theme-default/group-item.css";
-
-Vue.use(Group);
-Vue.use(GroupItem);
-```
-
 ### 示例
 
 `group`的`labelWidth`可以统一修改`group-item`的 label 宽度，若`group`不传`grid`就是自动计算每列的 item 数量

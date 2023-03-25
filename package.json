@@ -42,6 +42,7 @@
     "rollup-plugin-vue2": "^0.8.1",
     "tslib": "^2.5.0",
     "typescript": "^4.9.5",
+    "unplugin-vue-components": "^0.24.1",
     "vite": "^4.0.4",
     "vuepress-plugin-demo-container": "^0.2.0"
   },

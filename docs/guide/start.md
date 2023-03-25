@@ -21,93 +21,44 @@ yarn add @sugaz/gz-com
 
 ### 全局引入
 
-```js
-import Vue from "vue";
+```ts
+// main.ts
+import { createApp } from 'vue'
 import GzCom from "@sugaz/gz-com";
 import "@sugaz/gz-com/lib/theme-default/index.css";
+import App from './App.vue'
 
-Vue.use(GzCom);
+const app = createApp(App)
 
-/* 或写为
- * Vue.use(GzCom, {
- *   // GzCom 配置，下面有说明
- * });
- */
+app.use(GzCom, {
+  /* 全局options，默认配置core/config-provider.ts */
+})
+app.mount('#app')
 ```
 
 ### 按需引入
 
-借助 [babel-plugin-component](https://github.com/QingWei-Li/babel-plugin-component)，我们可以只引入需要的组件，以达到减小项目体积的目的。
-
-首先，安装 babel-plugin-component：
+借助 [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)，我们可以只引入需要的组件，以达到减小项目体积的目的。
 
 ```
-npm install babel-plugin-component -D
+yarn add -D unplugin-vue-components
 ```
 
-然后，将 .babelrc 修改为：
+#### Vite
 
-```json
-{
-  "presets": [["es2015", { "modules": false }]],
-  "plugins": [
-    [
-      "component",
-      {
-        "libraryName": "@sugaz/gz-com",
-        "styleLibraryName": "theme-default"
-      }
-    ]
-  ]
-}
-```
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite'
+import Components from 'unplugin-vue-components/vite'
+import { GzComResolver } from '@sugaz/gz-com/resolver'
 
-接下来，如果你只希望引入部分组件，比如 Group，那么需要在 main.js 中写入以下内容：
-
-```js
-import Vue from "vue";
-import { Group, GzCom } from "@sugaz/gz-com";
-import App from "./App.vue";
-
-Vue.use(GzCom); // 全局初始化配置
-Vue.use(Group);
-/* 或写为
- * Vue.component("your-group"), Group);
- */
-
-new Vue({
-  el: "#app",
-  render: (h) => h(App)
-});
-```
-
-### GzCom 配置
-
-引入该库时，有些组件会使用到全局配置，如`Table`组件，在<strong>按需引用</strong>时必须要手动引入
-
-```js
-import Vue from "vue";
-import { GzCom } from "@sugaz/gz-com";
-
-Vue.use(GzCom, {
-  /* options */
-});
-```
-
-默认的 options
-
-```js
-{
-    // 表格的props
-    table: {
-    border: true,
-    // 分页的props
-    pagination: {
-      layout: "prev, pager, next, total",
-      currentKey: "current",
-      totalKey: "total",
-      sizeKey: "size"
-    }
-  }
-}
+export default defineConfig({
+  // ...
+  plugins: [
+    // ...
+    Components({
+      resolvers: [GzComResolver()],
+    }),
+  ],
+})
 ```

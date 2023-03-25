@@ -1,16 +1,6 @@
 ## Table
 
-> 封装了[ElTable](https://element.eleme.cn/#/zh-CN/component/table)，更好的复用表格，嵌套了分页直接上手
-
-### 单独引入
-
-```js
-import Vue from "vue";
-import Table from "@sugaz/gz-com/lib/table";
-import "@sugaz/gz-com/lib/theme-default/table.css";
-
-Vue.use(Table);
-```
+> 封装了[ElTable](https://element-plus.org/zh-CN/component/table.html)，更好的复用表格，嵌套了分页直接上手
 
 ### 示例
 
@@ -19,7 +9,7 @@ Vue.use(Table);
 
 ### Table props
 
-基本都复用了[ElTable](https://element.eleme.cn/#/zh-CN/component/table)的 props，已下是新增的 props
+基本都复用了[ElTable](https://element-plus.org/zh-CN/component/table.html)的 props，已下是新增的 props
 
 | 参数                | 说明                                                                                                               | 类型       | 可选值            | 默认值 |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------- | ----------------- | ------ |
