@@ -17,7 +17,8 @@ export const defaultOptions = {
     pageSize: 10,
     currentKey: "current",
     sizeKey: "size",
-    totalKey: "total"
+    totalKey: "total",
+    layout: "total, sizes, prev, pager, next, jumper"
   }
 };
 

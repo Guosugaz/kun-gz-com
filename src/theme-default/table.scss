@@ -3,6 +3,6 @@ $bem: gz-table;
 .#{$bem} {
   &_pagination {
     margin-top: 10px;
-    text-align: right;
+    justify-content: flex-end;
   }
 }

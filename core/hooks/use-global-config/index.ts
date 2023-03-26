@@ -2,7 +2,7 @@ import { computed, getCurrentInstance, inject, provide, ref, unref } from "vue";
 import {
   configProviderContextKey,
   ConfigProviderContext,
-  defaultOptions
+  defaultOptions,
 } from "../../config-provider";
 import { debugWarn, keysOf } from "../../utils";
 
@@ -55,24 +55,61 @@ export const provideGlobalConfig = (
 
   const context = computed(() => {
     const cfg = unref(config);
-    if (!oldConfig?.value) return cfg;
-    return mergeConfig(oldConfig.value, cfg);
+    if (!oldConfig?.value) {
+      if (global) {
+        return deepMerge(defaultOptions, cfg);
+      } else {
+        return cfg;
+      }
+    }
+    return deepMerge(oldConfig.value, cfg);
   });
   provideFn(configProviderContextKey, context);
   if (global || !globalConfig.value) {
     globalConfig.value = context.value;
   }
+  console.log(context.value);
   return context;
 };
 
-const mergeConfig = (
-  a: ConfigProviderContext,
-  b: ConfigProviderContext
-): ConfigProviderContext => {
-  const keys = [...new Set([...keysOf(a), ...keysOf(b)])];
-  const obj: Record<string, any> = {};
-  for (const key of keys) {
-    obj[key] = b[key] ?? a[key];
+function deepMerge(target: any, source: any) {
+  const temp = deepClone(target);
+  if (typeof target !== "object" || typeof source !== "object") return false;
+  for (var prop in source) {
+    if (!source.hasOwnProperty(prop)) continue;
+    if (prop in target) {
+      if (typeof target[prop] !== "object") {
+        temp[prop] = source[prop];
+      } else {
+        if (typeof source[prop] !== "object") {
+          temp[prop] = source[prop];
+        } else {
+          if (target[prop].concat && source[prop].concat) {
+            temp[prop] = target[prop].concat(source[prop]);
+          } else {
+            temp[prop] = deepMerge(target[prop], source[prop]);
+          }
+        }
+      }
+    } else {
+      temp[prop] = source[prop];
+    }
   }
-  return obj as any;
-};
+  return temp;
+}
+
+function deepClone(obj: any) {
+  // 对常见的“非”值，直接返回原来值
+  if ([null, undefined, NaN, false].includes(obj)) return obj;
+  if (typeof obj !== "object" && typeof obj !== "function") {
+    //原始类型直接返回
+    return obj;
+  }
+  const o = Array.isArray(obj) ? [] : {};
+  for (let i in obj) {
+    if (obj.hasOwnProperty(i)) {
+      (o as any)[i] = typeof obj[i] === "object" ? deepClone(obj[i]) : obj[i];
+    }
+  }
+  return o;
+}
