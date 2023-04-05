@@ -17,14 +17,14 @@ function getSideEffects(partialName: string, options: GzComResolverOptions): Sid
 
   if (importStyle === 'sass') {
     return [
-      `${com}/src/theme-chalk/base.scss`,
-      `${com}/src/theme-chalk/${partialName}.scss`,
+      `${com}/src/theme-default/base.scss`,
+      `${com}/src/theme-default/${partialName}.scss`,
     ]
   }
   else if (importStyle === true || importStyle === 'css') {
     return [
-      `${com}/lib/theme-chalk/base.css`,
-      `${com}/lib/theme-chalk/${partialName}.css`,
+      `${com}/lib/theme-default/base.css`,
+      `${com}/lib/theme-default/${partialName}.css`,
     ]
   }
 }
