@@ -5,6 +5,7 @@
   "author": "Guosugaz",
   "license": "MIT",
   "type": "module",
+  "types": "lib/types",
   "scripts": {
     "dev": "concurrently \"npm run com:dev\" \"npm run theme:dev\"",
     "build": "concurrently \"npm run com:build\" \"npm run theme:build\"",
@@ -41,7 +42,7 @@
     "rollup-plugin-typescript2": "^0.34.1",
     "rollup-plugin-vue2": "^0.8.1",
     "tslib": "^2.5.0",
-    "typescript": "^4.9.5",
+    "typescript": "^5.0.3",
     "unplugin-vue-components": "^0.24.1",
     "vite": "^4.0.4",
     "vuepress-plugin-demo-container": "^0.2.0"

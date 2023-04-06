@@ -1,7 +1,8 @@
-import type { ComponentResolver, SideEffectsInfo } from 'unplugin-vue-components/types'
-import { kebabCase } from "unplugin-vue-components"
-
-const com = "@sugaz/gz-com"
+const com = "@sugaz/gz-com";
+function kebabCase(key: string) {
+  const result = key.replace(/([A-Z])/g, " $1").trim();
+  return result.split(" ").join("-").toLowerCase();
+}
 
 export interface GzComResolverOptions {
   /**
@@ -9,38 +10,40 @@ export interface GzComResolverOptions {
    *
    * @default true
    */
-  importStyle?: boolean | 'css' | 'sass'
+  importStyle?: boolean | "css" | "sass";
 }
 
-function getSideEffects(partialName: string, options: GzComResolverOptions): SideEffectsInfo | undefined {
-  const { importStyle = true } = options
+function getSideEffects(
+  partialName: string,
+  options: GzComResolverOptions
+): any | undefined {
+  const { importStyle = true } = options;
 
-  if (importStyle === 'sass') {
+  if (importStyle === "sass") {
     return [
       `${com}/src/theme-default/base.scss`,
-      `${com}/src/theme-default/${partialName}.scss`,
-    ]
-  }
-  else if (importStyle === true || importStyle === 'css') {
+      `${com}/src/theme-default/${partialName}.scss`
+    ];
+  } else if (importStyle === true || importStyle === "css") {
     return [
       `${com}/lib/theme-default/base.css`,
-      `${com}/lib/theme-default/${partialName}.css`,
-    ]
+      `${com}/lib/theme-default/${partialName}.css`
+    ];
   }
 }
 
-export function GzComResolver(options: GzComResolverOptions = {}): ComponentResolver {
+export function GzComResolver(options: GzComResolverOptions = {}): any {
   return {
-    type: 'component',
+    type: "component",
     resolve: (name: string) => {
-      if (name.startsWith('Van')) {
-        const partialName = name.slice(2)
+      if (name.startsWith("Van")) {
+        const partialName = name.slice(2);
         return {
           name: partialName,
           from: `${com}/lib`,
-          sideEffects: getSideEffects(kebabCase(partialName), options),
-        }
+          sideEffects: getSideEffects(kebabCase(partialName), options)
+        };
       }
-    },
-  }
+    }
+  };
 }

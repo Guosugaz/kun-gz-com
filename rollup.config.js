@@ -10,16 +10,20 @@ import typescript from "rollup-plugin-typescript2";
 
 const isProd = process.env.NODE_ENV === "production";
 const components = [
-  // "gz-com",
   // "async-message-box",
   // "dialog",
   "group",
   "group-item",
-  "date-picker-range"
-  // "table"
+  "date-picker-range",
+  "table"
 ];
 
 const external = ["element-plus", /element-plus\/.+/, "vue", "rxjs"];
+
+const typePlugin = typescript({
+  check: false,
+  useTsconfigDeclarationDir: true
+});
 
 const componentsConfig = components.map((name) => {
   return {
@@ -37,11 +41,9 @@ const componentsConfig = components.map((name) => {
           { find: /@core\/(.+)/, replacement: "@sugaz/gz-com/lib/$1" }
         ]
       }),
-      typescript({
-        check: false
-      }),
       vue(),
       jsImpoerSass(),
+      typePlugin,
       getBabelOutputPlugin({
         presets: ["@babel/preset-env"],
         plugins: [["@babel/plugin-transform-runtime"]]
@@ -67,7 +69,7 @@ const indexConfig = {
         { find: /@core\/(.+)/, replacement: "core/$1" }
       ]
     }),
-    typescript({ check: false }),
+    typePlugin,
     jsImpoerSass()
     // getBabelOutputPlugin({
     //   presets: ["@babel/env", { modules: "umd" }]
@@ -94,7 +96,7 @@ const utilsConfig = {
       targets: ["lib"]
     }),
     nodeResolve(),
-    typescript({ check: false }),
+    typePlugin,
     getBabelOutputPlugin({
       extensions: [...DEFAULT_EXTENSIONS, ".ts", ".tsx"],
       presets: ["@babel/preset-env"],
@@ -105,8 +107,8 @@ const utilsConfig = {
 };
 
 function getList() {
-  const list = [utilsConfig, indexConfig];
-  if (isProd) list.concat(componentsConfig);
+  let list = [utilsConfig, indexConfig];
+  if (isProd) list = list.concat(componentsConfig);
   return list;
 }
 
