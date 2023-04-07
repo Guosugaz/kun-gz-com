@@ -50,7 +50,7 @@ yarn add -D unplugin-vue-components
 // vite.config.ts
 import { defineConfig } from 'vite'
 import Components from 'unplugin-vue-components/vite'
-import { GzComResolver } from '@sugaz/gz-com/resolver'
+import { GzComResolver } from '@sugaz/gz-com/resolver/resolver.cjs'
 
 export default defineConfig({
   // ...

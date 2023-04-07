@@ -5,4 +5,6 @@ Group.install = function (app: App) {
   app.component(Group.name, Group);
 };
 
+export { Group };
+
 export default Group;

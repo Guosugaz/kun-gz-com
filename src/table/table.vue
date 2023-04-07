@@ -20,7 +20,7 @@ import {
 //   import { isDef } from "@core/utils";
 import { useVModels } from "@vueuse/core";
 import { Column, tableProps } from "./table.props";
-import { useGlobalConfig } from "@core/hooks/use-global-config";
+import { useGlobalConfig } from "@core/hooks";
 
 const props = defineProps(tableProps);
 const emit = defineEmits<{

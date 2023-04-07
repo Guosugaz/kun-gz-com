@@ -5,4 +5,6 @@ Table.install = function (app: App) {
   app.component(Table.name, Table);
 };
 
+export { Table };
+
 export default Table;

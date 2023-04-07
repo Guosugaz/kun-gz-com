@@ -20,7 +20,7 @@
   import { computed, defineComponent, inject, ref } from "vue";
   import { groupItemProps } from "./group-item-props";
   import { defaultOptions } from "@core/config-provider";
-  import { useGlobalConfig } from "@core/hooks/use-global-config";
+  import { useGlobalConfig } from "@core/hooks";
 
   const bem = ref("gz-group-item");
   const GzGroup = inject("GzGroup", {

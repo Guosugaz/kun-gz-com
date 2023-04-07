@@ -15,7 +15,8 @@
     "com:build": "cross-env NODE_ENV=production rollup -c",
     "theme:build": "cross-env NODE_ENV=production gulp -f gulpfile.cjs build",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "resolver": "tsc resolver --outDir resolver --module commonjs --declaration"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",

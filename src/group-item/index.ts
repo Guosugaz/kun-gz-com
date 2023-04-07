@@ -5,4 +5,6 @@ GroupItem.install = function (app: App) {
   app.component(GroupItem.name, GroupItem);
 };
 
+export { GroupItem };
+
 export default GroupItem;

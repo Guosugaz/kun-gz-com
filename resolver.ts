@@ -36,11 +36,11 @@ export function GzComResolver(options: GzComResolverOptions = {}): any {
   return {
     type: "component",
     resolve: (name: string) => {
-      if (name.startsWith("Van")) {
+      if (name.startsWith("Gz")) {
         const partialName = name.slice(2);
         return {
           name: partialName,
-          from: `${com}/lib`,
+          from: `${com}/lib/${kebabCase(partialName)}`,
           sideEffects: getSideEffects(kebabCase(partialName), options)
         };
       }
