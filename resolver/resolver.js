@@ -1,22 +1,12 @@
+import components from "../component-list.js";
+
 const com = "@sugaz/gz-com";
-function kebabCase(key: string) {
+function kebabCase(key) {
   const result = key.replace(/([A-Z])/g, " $1").trim();
   return result.split(" ").join("-").toLowerCase();
 }
 
-export interface GzComResolverOptions {
-  /**
-   * import style css or scss along with components
-   *
-   * @default true
-   */
-  importStyle?: boolean | "css" | "sass";
-}
-
-function getSideEffects(
-  partialName: string,
-  options: GzComResolverOptions
-): any | undefined {
+function getSideEffects(partialName, options) {
   const { importStyle = true } = options;
 
   if (importStyle === "sass") {
@@ -32,17 +22,20 @@ function getSideEffects(
   }
 }
 
-export function GzComResolver(options: GzComResolverOptions = {}): any {
+export function GzComResolver(options = {}) {
   return {
     type: "component",
-    resolve: (name: string) => {
+    resolve: (name) => {
       if (name.startsWith("Gz")) {
         const partialName = name.slice(2);
-        return {
-          name: partialName,
-          from: `${com}/lib/${kebabCase(partialName)}`,
-          sideEffects: getSideEffects(kebabCase(partialName), options)
-        };
+        const kb = kebabCase(partialName);
+        if (components.includes(kb)) {
+          return {
+            name: partialName,
+            from: `${com}/lib/${kb}`,
+            sideEffects: getSideEffects(kb, options)
+          };
+        }
       }
     }
   };

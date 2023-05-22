@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     v-bind="$attrs"
-    :visible="show"
+    v-model="syncModelValue"
     :width="wrapWidth"
     :custom-class="wrapClass"
     :top="mapTop"
@@ -11,63 +11,82 @@
     :close-on-click-modal="closeOnClickModal"
     @close="handleCancel"
   >
-    <div slot="title" ref="title" :class="`${bem}-title`">
-      <div  :class="`${bem}-title_left`">{{ title }}</div>
-      <div :class="`${bem}-title_right`">
-        <!-- 刷新按钮 -->
-        <i
-          v-if="refresh"
-          class="el-icon-refresh-left icon"
-          @click="handleRefresh"
-        />
-        <!-- 全屏按钮 -->
-        <i
-          v-if="showFullscreen"
-          :class="`el-icon-${
-            isFullscreen ? 'copy-document' : 'full-screen'
-          } icon`"
-          @click="handleFullscreen"
-        />
-        <!-- 关闭按钮 -->
-        <i
-          v-if="showClose"
-          class="el-icon-close icon"
-          @click="$emit('update:show', false)"
-        />
+    <template #title>
+      <div ref="titleRef" :class="`${bem}-title`">
+        <div :class="`${bem}-title_left`">{{ title }}</div>
+        <div :class="`${bem}-title_right`">
+          <!-- 刷新按钮 -->
+          <el-icon
+            v-if="refresh"
+            class="el-icon-refresh-left icon"
+            @click="handleRefresh"
+          >
+            <Refresh />
+          </el-icon>
+          <!-- 全屏按钮 -->
+          <el-icon
+            v-if="showFullscreen"
+            class="el-icon-close icon"
+            @click="handleFullscreen"
+          >
+            <component :is="isFullscreen ? 'CopyDocument' : 'FullScreen'" />
+          </el-icon>
+          <!-- 关闭按钮 -->
+          <el-icon
+            v-if="showClose"
+            class="el-icon-close icon"
+            @click="syncModelValue = false"
+          >
+            <Close />
+          </el-icon>
+        </div>
       </div>
-    </div>
+    </template>
+
     <div :style="bodyStyle" :class="`${bem}-body`">
       <slot />
     </div>
-    <div v-if="$slots.footer" ref="footer" slot="footer" :class="`${bem}-footer`">
-      <slot name="footer" />
-    </div>
+    <template #footer>
+      <div v-if="$slots.footer" ref="footer" :class="`${bem}-footer`">
+        <slot name="footer" />
+      </div>
+    </template>
   </el-dialog>
 </template>
 
-<script>
+<script lang="ts">
   /**
    * @description: 封装一下 el-dialog
-   * @see https://element.eleme.cn/#/zh-CN/component/dialog
+   * @see https://element-plus.gitee.io/zh-CN/component/dialog.html#%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95
    */
-  import variables from "@/theme-default/common/variables.scss";
-  import { isDef } from "@sugaz/gz-com/lib/utils/index.js";
+  import { isDef } from "@core/utils";
+  import { defineComponent } from "vue";
+  import {
+    Close,
+    Refresh,
+    CopyDocument,
+    FullScreen
+  } from "@element-plus/icons-vue";
 
   const bem = "gz-dialog";
-  const widthList = variables.dialogWidthTypes.split(",");
 
-  export default {
+  export default defineComponent({
     name: "GzDialog",
-    inheritAttrs: false,
+    components: {
+      Close,
+      Refresh,
+      CopyDocument,
+      FullScreen
+    },
+    // inheritAttrs: false,
     props: {
-      show: {
+      modelValue: {
         type: Boolean,
         default: false
       },
-      // 可选 normal large，small 或者普通的单位 500px
       width: {
         type: String,
-        default: "normal"
+        default: "600px"
       },
       // 距离顶部的高度，不设置就默认居中
       top: {
@@ -105,6 +124,7 @@
         default: true
       }
     },
+    emits: ["update:modelValue", "close"],
     data() {
       return {
         isFullscreen: false,
@@ -112,15 +132,26 @@
       };
     },
     computed: {
+      syncModelValue: {
+        get() {
+          return this.modelValue;
+        },
+        set(val: boolean) {
+          this.$emit("update:modelValue", val);
+        }
+      },
       bodyStyle() {
         if (this.isFullscreen) {
           let footerHieght = 0;
           let titleHieght = 0;
           if (this.$slots?.footer) {
-            footerHieght = this.$refs.footer?.offsetHeight || 0;
+            footerHieght =
+              (this.$refs.footer as HTMLElement)?.offsetHeight || 0;
           }
-          titleHieght = this.$refs.title?.offsetHeight || 0;
-          return { height: `calc(100vh - ${titleHieght}px - ${footerHieght}px)` };
+          titleHieght = (this.$refs.titleRef as HTMLElement)?.offsetHeight || 0;
+          return {
+            height: `calc(100vh - ${titleHieght}px - ${footerHieght}px)`
+          };
         } else {
           return { "max-height": "70vh" };
         }
@@ -128,10 +159,6 @@
       // 容器的宽度
       wrapWidth() {
         if (this.isFullscreen) return "100%";
-
-        const index = widthList.indexOf(this.width);
-        const widthRange = variables.dialogWidthRange.split(",");
-        if (index > -1) return widthRange[index];
         return this.width;
       },
       wrapClass() {
@@ -139,19 +166,14 @@
         if (this.isFullscreen) return `${wrapClass} ${bem}_fullscreen`;
         // 没设置高度就默认居中
         if (!isDef(this.top)) wrapClass = `${wrapClass} ${bem}_middle`;
-        return widthList.reduce((pre, key) => {
-          if (this.width === key) {
-            pre += ` ${bem}_${key}`;
-          }
-          return pre;
-        }, wrapClass);
+        return wrapClass;
       },
       mapTop() {
         return isDef(this.top) ? this.top : "0";
       }
     },
     watch: {
-      show(val) {
+      modelValue(val) {
         if (!val && this.isFullscreen) {
           setTimeout(() => {
             this.isFullscreen = false;
@@ -162,7 +184,7 @@
     methods: {
       handleCancel() {
         this.$emit("close");
-        this.$emit("update:show", false);
+        this.syncModelValue = false;
       },
       // 点击刷新
       handleRefresh() {
@@ -175,5 +197,5 @@
         this.isFullscreen = !this.isFullscreen;
       }
     }
-  };
+  });
 </script>

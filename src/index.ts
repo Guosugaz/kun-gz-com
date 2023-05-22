@@ -4,8 +4,8 @@ import GroupItem from "./group-item/index";
 import type { ConfigProviderContext } from "@core/config-provider";
 import { provideGlobalConfig } from "@core/hooks";
 // import AsyncMessageBox from "./async-message-box/index.js";
-// import Dialog from "./dialog/index";
-import DatePickerRange from "./date-picker-range/index";
+import Dialog from "./dialog/index";
+import DatePicker from "./date-picker/index";
 import Table from "./table/index";
 
 export default {
@@ -13,16 +13,16 @@ export default {
     provideGlobalConfig(options, app, true);
     app
       // .use(AsyncMessageBox)
-      // .use(Dialog)
+      .use(Dialog as unknown as Plugin)
       .use(Group as unknown as Plugin)
       .use(GroupItem as unknown as Plugin)
-      .use(DatePickerRange as unknown as Plugin)
+      .use(DatePicker as unknown as Plugin)
       .use(Table as unknown as Plugin);
   },
   // AsyncMessageBox,
-  // Dialog,
+  Dialog,
   Group,
   GroupItem,
-  DatePickerRange,
+  DatePicker,
   Table
 };

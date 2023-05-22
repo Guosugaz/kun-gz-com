@@ -7,18 +7,17 @@ import jsImpoerSass from "./rollup-plugin-js-import-sass.js";
 import clear from "rollup-plugin-clear";
 import { DEFAULT_EXTENSIONS } from "@babel/core";
 import typescript from "rollup-plugin-typescript2";
+import components from "./component-list.js";
 
 const isProd = process.env.NODE_ENV === "production";
-const components = [
-  // "async-message-box",
-  // "dialog",
-  "group",
-  "group-item",
-  "date-picker-range",
-  "table"
-];
 
-const external = ["element-plus", /element-plus\/.+/, "vue", "rxjs"];
+const external = [
+  "element-plus",
+  /element-plus\/.+/,
+  "vue",
+  "rxjs",
+  "@element-plus/icons-vue"
+];
 
 const typePlugin = typescript({
   check: false,
