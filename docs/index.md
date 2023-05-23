@@ -1,7 +1,7 @@
 ---
 layout: home
 
-title: Seven-Bit-UI
+title: GZ-UI
 titleTemplate: 起始页
 
 hero:

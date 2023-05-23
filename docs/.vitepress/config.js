@@ -42,7 +42,7 @@ export default {
       { text: "开发指南", link: "/guide/start" },
       { text: "组件使用", link: "/examples/Group/" }
     ],
-    socialLinks: [{ icon: "github", link: "https://github.com/aiai0603" }],
+    socialLinks: [{ icon: "github", link: "https://github.com/Guosugaz/kun-gz-com" }],
     sidebar: {
       "/guide/": guide,
       "/examples/": [common]
